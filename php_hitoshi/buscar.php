@@ -1,20 +1,28 @@
 <?php
 require_once 'config/database.php';
 
-$res=$conn->query("SELECT nombre FROM estudiantes WHERE nombre= ?");
+$nombre = $_POST['nombre'];
 
-$stmt->bind_param('s', $nombre);
+$conn = getConnection();
+
+$parametro = "%" . $nombre . "%";
+
+$stmt = $conn->prepare("SELECT nombre,apellido,email FROM estudiantes WHERE nombre LIKE ?");
+$stmt->bind_param("s", $parametro);
 $stmt->execute();
-$res = $stmt->get_result();
+$resultado = $stmt->get_result();
 ?>
+
 <table>
-  <thead><tr><th>Nombre</th></tr></thead>
+  <thead><tr><th>Nombre</th><th>Apellido</th><th>Correo</th><thead>
   <tbody>
-  <?php while ($f = $res->fetch_assoc()): ?>
+  <?php while ($f = $resultado->fetch_assoc()): ?>
     <tr>
       <td><?= htmlspecialchars($f['nombre']) ?></td>
+      <td><?= htmlspecialchars($f['apellido']) ?></td>
+      <td><?= htmlspecialchars($f['email']) ?></td>
     </tr>
   <?php endwhile; ?>
   </tbody>
 </table>
-<p>Total: <?= $res->num_rows ?> estudiantes</p>
+<p>Total: <?= $resultado->num_rows ?> estudiantes</p>
