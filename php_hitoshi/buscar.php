@@ -1,6 +1,7 @@
 <?php
 require_once 'config/database.php';
 
+
 $nombre = $_POST['nombre'];
 
 $conn = getConnection();
@@ -12,6 +13,8 @@ $stmt->bind_param("s", $parametro);
 $stmt->execute();
 $resultado = $stmt->get_result();
 ?>
+
+<link rel="stylesheet" href="pico-main/css/pico.min.css">
 
 <table>
   <thead><tr><th>Nombre</th><th>Apellido</th><th>Correo</th><thead>
@@ -26,3 +29,7 @@ $resultado = $stmt->get_result();
   </tbody>
 </table>
 <p>Total: <?= $resultado->num_rows ?> estudiantes</p>
+
+<a href="main.php">
+        <button type="button">Volver</button>
+    </a>

@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim($_POST['email']);
 
     if (empty($nombre) || empty($apellido) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Datos inválidos.';
+        echo 'Datos invalidos';
     } else {
         $conn     = getConnection();
         $nombre   = $conn->real_escape_string($nombre);
@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email    = $conn->real_escape_string($email);
         $conn->query("INSERT INTO estudiantes (nombre,apellido,email)
                       VALUES ('$nombre','$apellido','$email')");
-        header('Location: insertar.html');
-        exit;
+        header('Location: main.php');
+        exit();
     }
 }
 ?>
