@@ -1,18 +1,15 @@
 <?php
 require_once 'config/database.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre   = trim($_POST['nombre']);
-    $apellido = trim($_POST['apellido']);
-    $email    = trim($_POST['email']);
+    $id   = trim($_POST['id']);
 
-    if (empty($nombre) || empty($apellido) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (empty($id)) {
         $error = 'Datos inválidos.';
     } else {
         $conn     = getConnection();
-        $nombre   = $conn->real_escape_string($nombre);
-        $apellido = $conn->real_escape_string($apellido);
-        $email    = $conn->real_escape_string($email);
-        $conn->query("DELETE FROM estudiantes WHERE nombre = '$nombre' AND apellido = '$apellido' AND email = '$email';");
+        $id   = $conn->real_escape_string($id);
+
+        $conn->query("DELETE FROM estudiantes WHERE id = '$id';");
         header('Location: main.php');
         exit();
     }

@@ -22,18 +22,14 @@ $res  = $conn->query('SELECT * FROM estudiantes WHERE activo=1 ORDER BY apellido
       <td><?= htmlspecialchars($f['email']) ?></td>
       <td>
         <form action="eliminar.php" method="POST" style="margin:0;">
-          <input type="hidden" name="nombre" value="<?= htmlspecialchars($f['nombre']) ?>">
-          <input type="hidden" name="apellido" value="<?= htmlspecialchars($f['apellido']) ?>">
-          <input type="hidden" name="email" value="<?= htmlspecialchars($f['email']) ?>">
+          <input type="hidden" name="id" value="<?= htmlspecialchars($f['id']) ?>">
           <button type="submit" class="secondary" onclick="return confirm('¿Estás seguro de eliminar a <?= htmlspecialchars($f['nombre']) ?>?');">Eliminar</button>
         </form>
       </td>
       <td>
-        <form action="Editar.php" method="POST" style="margin:0;"> 
-         <input type="hidden" name="nombre" value="<?= htmlspecialchars($f['nombre']) ?>">
-          <input type="hidden" name="apellido" value="<?= htmlspecialchars($f['apellido']) ?>">
-          <input type="hidden" name="email" value="<?= htmlspecialchars($f['email']) ?>">
-          <button type="submit" class="secondary";>Editor</button>
+        <form action="editar.php" method="GET" style="margin:0;"> 
+         <input type="hidden" name="id" value="<?= htmlspecialchars($f['id']) ?>">
+          <button type="submit" class="secondary";>Editar</button>
         </form>
       </td>
     </tr>
