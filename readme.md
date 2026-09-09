@@ -6,8 +6,9 @@ Este repositorio reúne el material trabajado a lo largo del cursado. El objetiv
 A continuación se detalla la organización de las carpetas y archivos del proyecto:
 
 ### Clases_PHP:
-Prueba:  Pruebas sueltas de sistemas elaborados con PHP
-php_hitoshi:  CRUD(Create, Read, Update, Delete) completo de estudiantes con ayuda de Pico CSS
+Prueba:  Pruebas sueltas de sistemas elaborados con PHP.
+
+php_hitoshi:  CRUD(Create, Read, Update, Delete) completo de estudiantes con ayuda de Pico CSS.
 
 ---
 
