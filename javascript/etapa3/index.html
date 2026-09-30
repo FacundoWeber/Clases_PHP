@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carga de Estudiantes</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 8px;
+      text-align: left;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    .campo {
+      margin-bottom: 10px;
+    }
+    .acciones-tabla {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Gestión de Estudiantes</h2>
+
+<form id="formulario">
+  <div class="campo">
+    <label for="name">Nombre:</label><br>
+    <input type="text" id="name" name="fname" required>
+  </div>
+
+  <div class="campo">
+    <label for="notas">Notas (separadas por coma, ej: 7, 8, 9):</label><br>
+    <input type="text" id="notas" name="notas" placeholder="Ej: 8, 9, 7" required>
+  </div>
+
+  <div class="campo">
+    <label for="minima">Nota mínima para aprobar:</label><br>
+    <input type="number" id="minima" name="minima" value="6" min="1" max="10">
+  </div>
+
+  <input type="submit" value="Agregar Estudiante">
+</form>
+
+<div class="acciones-tabla">
+  <button type="button" id="btn-limpiar">Borrar Tabla</button>
+</div>
+
+<table style="width:100%" id="tabla-estudiantes">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Promedio</th>
+      <th>Calificación</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody id="cuerpo-tabla">
+  </tbody>
+</table>
+
+<script src="js/app.js"></script>
+</body>
+</html>
