@@ -1,69 +1,48 @@
-function calcularPromedio(notas) {
-  if (!notas || notas.length === 0) return 0;
-  const suma = notas.reduce((acumulador, nota) => acumulador + nota, 0);
-  return suma / notas.length;
-}
-
-function estaAprobado(nota, minima = 6) {
-  return nota >= minima;
-}
-
-function obtenerCalificacion(promedio) {
-  if (promedio >= 9) return "Sobresaliente";
-  if (promedio >= 7.5) return "Muy bueno";
-  if (promedio >= 6) return "Bueno";
-  return "Desaprobado";
-}
-
-const formulario = document.getElementById("formulario");
 const cuerpoTabla = document.getElementById("cuerpo-tabla");
-const btnLimpiar = document.getElementById("btn-limpiar");
+const btnRecargar = document.getElementById("btn-recargar");
+const divCargando = document.getElementById("cargando");
 
-//tabla
-formulario.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const nombre = document.getElementById("name").value.trim();
-  const notasInput = document.getElementById("notas").value;
-  const notaMinimaInput = document.getElementById("minima").value;
-
-  const notaMinima = notaMinimaInput !== "" ? parseFloat(notaMinimaInput) : 6;
-
-  const notasArray = notasInput
-    .split(",")
-    .map(n => parseFloat(n.trim()))
-    .filter(n => !isNaN(n));
-
-  if (notasArray.length === 0) {
-    alert("Por favor, ingresa al menos una nota válida.");
-    return;
-  }
-
-  const promedio = Number(calcularPromedio(notasArray).toFixed(2));
-  const calificacion = obtenerCalificacion(promedio);
-  const aprobado = estaAprobado(promedio, notaMinima);
-
-  const nuevaFila = document.createElement("tr");
-
-  nuevaFila.innerHTML = `
-    <td>${nombre}</td>
-    <td>${promedio}</td>
-    <td>${calificacion}</td>
-    <td>${aprobado ? "Aprobado" : "Desaprobado"}</td>
-  `;
-
-  cuerpoTabla.appendChild(nuevaFila);
-
-  document.getElementById("name").value = "";
-  document.getElementById("notas").value = "";
-});
-
-// Evento para borrar todo el contenido de la tabla
-btnLimpiar.addEventListener("click", function() {
-  if (cuerpoTabla.children.length === 0) {
-    alert("La tabla ya está vacía.");
-    return;
-  }
-
+// Función para obtener y mostrar los usuarios
+function cargarUsuarios() {
+  // 1. Mostrar el indicador de carga y limpiar la tabla actual
+  divCargando.style.display = "block";
   cuerpoTabla.innerHTML = "";
-});
+
+  // 2. Hacer el fetch a la API pública
+  fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error en la red al intentar obtener los usuarios.");
+      }
+      return response.json();
+    })
+    .then(usuarios => {
+      // 3. Ocultar el indicador de carga
+      divCargando.style.display = "none";
+
+      // 4. Recorrer cada usuario y agregarlo a la tabla
+      usuarios.forEach(usuario => {
+        const nuevaFila = document.createElement("tr");
+
+        // El JSON de la API tiene la ciudad dentro del objeto anidado `address`
+        nuevaFila.innerHTML = `
+          <td>${usuario.name}</td>
+          <td>${usuario.email}</td>
+          <td>${usuario.address.city}</td>
+        `;
+
+        cuerpoTabla.appendChild(nuevaFila);
+      });
+    })
+    .catch(error => {
+      divCargando.style.display = "none";
+      console.error("Hubo un problema con la petición Fetch:", error);
+      cuerpoTabla.innerHTML = `<tr><td colspan="3" style="color: red; text-align: center;">Error al cargar los datos.</td></tr>`;
+    });
+}
+
+// Cargar los usuarios automáticamente al cargar la página
+document.addEventListener("DOMContentLoaded", cargarUsuarios);
+
+// Evento para el botón 'Recargar'
+btnRecargar.addEventListener("click", cargarUsuarios);
