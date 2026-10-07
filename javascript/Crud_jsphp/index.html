@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Estudiantes</title>
+    <!-- Estilos de Pico CSS -->
+    <link rel="stylesheet" href="pico-main/css/pico.min.css">
+    <style> 
+      button {
+        --pico-line-height: 0.5;
+      }
+    </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Gestión de Estudiantes</h1>
+
+    <!-- Buscador en tiempo real -->
+    <input type="search" id="buscador" placeholder="Buscar estudiante por nombre o apellido...">
+
+    <!-- Formulario para agregar estudiante por POST (sin recargar) -->
+    <form id="form-estudiante">
+      <fieldset role="group">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <button type="submit">Agregar</button>
+      </fieldset>
+    </form>
+
+    <!-- Tabla donde se cargarán los estudiantes vía fetch -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-estudiantes">
+        <!-- Los datos se inyectarán aquí con JavaScript -->
+      </tbody>
+    </table>
+    <p id="total-estudiantes">Total: 0 estudiantes</p>
+  </main>
+
+  <!-- Tu archivo de JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
