@@ -4,11 +4,9 @@ const divCargando = document.getElementById("cargando");
 
 // Función para obtener y mostrar los usuarios
 function cargarUsuarios() {
-  // 1. Mostrar el indicador de carga y limpiar la tabla actual
   divCargando.style.display = "block";
   cuerpoTabla.innerHTML = "";
 
-  // 2. Hacer el fetch a la API pública
   fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => {
       if (!response.ok) {
@@ -17,10 +15,8 @@ function cargarUsuarios() {
       return response.json();
     })
     .then(usuarios => {
-      // 3. Ocultar el indicador de carga
       divCargando.style.display = "none";
 
-      // 4. Recorrer cada usuario y agregarlo a la tabla
       usuarios.forEach(usuario => {
         const nuevaFila = document.createElement("tr");
 
