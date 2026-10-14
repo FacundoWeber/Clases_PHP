@@ -4,7 +4,7 @@ require_once 'config/database.php';
 $id = $_GET['id'] ?? null;
 
 if (!$id) {
-    header('Location: main.php');
+    header('Location: index.html');
     exit();
 }
 
