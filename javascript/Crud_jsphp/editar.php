@@ -24,6 +24,11 @@ $estudiante = $resultado->fetch_assoc();
     Nuevo Nombre: <input type="text" name="nombre" value="<?= htmlspecialchars($estudiante['nombre']) ?>"><br>
     Nuevo Apellido: <input type="text" name="apellido" value="<?= htmlspecialchars($estudiante['apellido']) ?>"><br>
     Nuevo E-mail: <input type="text" name="email" value="<?= htmlspecialchars($estudiante['email']) ?>"><br>
+    <fieldset role="group">
+    Nueva 1ra nota: <input type="text" name="p1" value="<?= htmlspecialchars(!empty($estudiante['p1']) ? $estudiante['p1'] : 0) ?>">
+    Nueva 2da nota: <input type="text" name="p2" value="<?= htmlspecialchars(!empty($estudiante['p2']) ? $estudiante['p2'] : 0) ?>">
+    Nueva 3ra nota: <input type="text" name="p3" value="<?= htmlspecialchars(!empty($estudiante['p3']) ? $estudiante['p3'] : 0) ?>">
+    </fieldset>
     <input type="submit" value="Guardar Cambios">
 </form>
 

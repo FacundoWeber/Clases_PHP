@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     fila.innerHTML = `
                         <td>${estudiante.nombre} ${estudiante.apellido}</td>
                         <td>${estudiante.email}</td>
+                        <td>${estudiante.p1}, ${estudiante.p2}, ${estudiante.p3}</td>
                         <td><button class="secondary outline" onclick="eliminarEstudiante(${estudiante.id})">Eliminar</button>
                         <button class="secondary outline" onclick="editarEstudiante(${estudiante.id})">Editar</button></td>
                     `;
@@ -73,7 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const nuevoEstudiante = {
             nombre: document.getElementById("nombre").value,
             apellido: document.getElementById("apellido").value,
-            email: document.getElementById("email").value
+            email: document.getElementById("email").value,
+            p1: document.getElementById("p1").value,
+            p2: document.getElementById("p2").value,
+            p3: document.getElementById("p3").value
         };
 
         fetch(API_URL, {

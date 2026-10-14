@@ -40,9 +40,12 @@ if ($method === 'GET') {
     $nombre = $conn->real_escape_string($data['nombre'] ?? '');
     $apellido = $conn->real_escape_string($data['apellido'] ?? '');
     $email = $conn->real_escape_string($data['email'] ?? '');
+    $p1 = $conn->real_escape_string($data['p1'] ?? '');
+    $p2 = $conn->real_escape_string($data['p2'] ?? '');
+    $p3 = $conn->real_escape_string($data['p3'] ?? '');
 
     if (!empty($nombre) && !empty($apellido) && !empty($email)) {
-        $sql = "INSERT INTO estudiantes (nombre, apellido, email, activo) VALUES ('$nombre', '$apellido', '$email', 1)";
+        $sql = "INSERT INTO estudiantes (nombre, apellido, email, activo, p1, p2, p3) VALUES ('$nombre', '$apellido', '$email', 1,'$p1','$p2','$p3')";
         if ($conn->query($sql)) {
             echo json_encode(["success" => true, "message" => "Estudiante agregado con éxito"]);
         } else {

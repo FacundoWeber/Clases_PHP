@@ -8,6 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $conn->real_escape_string($_POST['nombre'] ?? '');
     $apellido = $conn->real_escape_string($_POST['apellido'] ?? '');
     $email = trim($_POST['email'] ?? '');
+    $p1 = trim($_POST['p1'] ?? '');
+    $p2 = trim($_POST['p2'] ?? '');
+    $p3 = trim($_POST['p3'] ?? '');
+    
 
     // Validar que no estén vacíos y que el email tenga un formato válido (@, dominio, etc.)
     if (!empty($id) && !empty($nombre) && !empty($apellido) && !empty($email)) {
@@ -18,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $email_escaped = $conn->real_escape_string($email);
-        $sql = "UPDATE estudiantes SET nombre = '$nombre', apellido = '$apellido', email = '$email_escaped' WHERE id = '$id'";
+        $sql = "UPDATE estudiantes SET nombre = '$nombre', apellido = '$apellido', email = '$email_escaped', p1 = '$p1', p2 = '$p2', p3 = '$p3'  WHERE id = '$id'";
         
         if ($conn->query($sql)) {
             header('Location: index.html?success=editado');
