@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     fila.innerHTML = `
                         <td>${estudiante.nombre} ${estudiante.apellido}</td>
                         <td>${estudiante.email}</td>
-                        <td><button class="secondary outline" onclick="eliminarEstudiante(${estudiante.id})">Eliminar</button></td>
+                        <td><button class="secondary outline" onclick="eliminarEstudiante(${estudiante.id})">Eliminar</button>
+                        <button class="secondary outline" onclick="editarEstudiante(${estudiante.id})">Editar</button></td>
                     `;
                     tablaEstudiantes.appendChild(fila);
                 });
@@ -54,6 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Error al eliminar:", error));
         }
     }
+
+    window.editarEstudiante = function(id) {
+        window.location.href = `editar.php?id=${id}`;
+    };
 
     cargarEstudiantes();
 

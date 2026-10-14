@@ -27,7 +27,7 @@ $estudiante = $resultado->fetch_assoc();
     <input type="submit" value="Guardar Cambios">
 </form>
 
-<a href="main.php">
+<a href="index.html">
     <button type="button">Volver</button>
 </a>
 
