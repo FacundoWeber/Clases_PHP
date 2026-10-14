@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
             nombre: document.getElementById("nombre").value,
             apellido: document.getElementById("apellido").value,
             email: document.getElementById("email").value,
-            p1: document.getElementById("p1").value,
-            p2: document.getElementById("p2").value,
-            p3: document.getElementById("p3").value
+            p1: Number(document.getElementById("p1").value) || 0,
+            p2: Number(document.getElementById("p2").value) || 0,
+            p3: Number(document.getElementById("p3").value) || 0
         };
 
         fetch(API_URL, {
