@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style> 
+      button {
+        --pico-line-height: 0.5;
+      }
+    </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Gestor de productos</h1>
+
+    <!-- Buscador en tiempo real -->
+    <input type="search" id="buscador" placeholder="Buscar productos por nombre o apellido...">
+
+    <!-- Formulario para agregar productos por POST (sin recargar) -->
+    <form id="form-productos">
+      <fieldset role="group">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+        <input type="number" id="precio" name="precio" placeholder="Precio" required>
+        <input type="number" id="stock" name="stock" placeholder="Stock" required>
+        <button type="submit">Agregar</button>
+      </fieldset>
+    </form>
+
+    <!-- Tabla donde se cargarán los productoss vía fetch -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-productos">
+        <!-- Los datos se inyectarán aquí con JavaScript -->
+      </tbody>
+    </table>
+    <p id="total-productos">Total: 0 productoss</p>
+  </main>
+
+  <!-- Tu archivo de JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
