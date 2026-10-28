@@ -9,6 +9,13 @@
       button {
         --pico-line-height: 0.5;
       }
+      th {
+        cursor: pointer;
+        user-select: none;
+      }
+      th:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+      }
     </style>
 </head>
 <body>
@@ -16,32 +23,34 @@
     <h1>Gestor de productos</h1>
 
     <!-- Buscador en tiempo real -->
-    <input type="search" id="buscador" placeholder="Buscar productos por nombre o apellido...">
+    <input type="search" id="buscador" placeholder="Buscar productos por nombre...">
 
     <!-- Formulario para agregar productos por POST (sin recargar) -->
     <form id="form-productos">
       <fieldset role="group">
         <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
-        <input type="number" id="precio" name="precio" placeholder="Precio" required>
-        <input type="number" id="stock" name="stock" placeholder="Stock" required>
+        <input type="number" id="precio" name="precio" placeholder="Precio" step="0.01" min="0" required>
+        <input type="number" id="stock" name="stock" placeholder="Stock" min="0" required>
         <button type="submit">Agregar</button>
       </fieldset>
     </form>
 
-    <!-- Tabla donde se cargarán los productoss vía fetch -->
+    <!-- Tabla donde se cargarán los productos vía fetch -->
     <table>
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Precio</th>
-          <th>Stock</th>
+          <th onclick="ordenarPor('Nombre')">Nombre ↕️</th>
+          <th onclick="ordenarPor('Precio')">Precio ↕️</th>
+          <th onclick="ordenarPor('Stock')">Stock ↕️</th>
+          <th>Subtotal</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody id="tabla-productos">
         <!-- Los datos se inyectarán aquí con JavaScript -->
       </tbody>
     </table>
-    <p id="total-productos">Total: 0 productoss</p>
+    <p id="total-productos">Total: 0 productos</p>
   </main>
 
   <!-- Tu archivo de JavaScript -->

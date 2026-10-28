@@ -37,19 +37,24 @@ if ($method === 'GET') {
     // Recibir los datos JSON enviados por fetch
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $nombre = $conn->real_escape_string($data['nombre'] ?? '');
-    $precio = $conn->real_escape_string($data['precio'] ?? '');
-    $stock = $conn->real_escape_string($data['stock'] ?? '');
+    $nombre = trim($data['nombre'] ?? '');
+    $precio = $data['precio'] ?? '';
+    $stock = $data['stock'] ?? '';
 
-    if (!empty($nombre) && !empty($precio) && !empty($stock)) {
-        $sql = "INSERT INTO productos (Nombre, Precio, Stock, Activo) VALUES ('$nombre', '$precio', '$stock', 1)";
+    // Validación estricta en servidor
+    if (!empty($nombre) && is_numeric($precio) && $precio >= 0 && is_numeric($stock) && $stock >= 0) {
+        $nombreEsc = $conn->real_escape_string($nombre);
+        $precioEsc = (float)$precio;
+        $stockEsc = (int)$stock;
+
+        $sql = "INSERT INTO productos (Nombre, Precio, Stock, Activo) VALUES ('$nombreEsc', $precioEsc, $stockEsc, 1)";
         if ($conn->query($sql)) {
             echo json_encode(["success" => true, "message" => "Producto agregado con éxito"]);
         } else {
             echo json_encode(["success" => false, "message" => "Error al guardar en la base de datos"]);
         }
     } else {
-        echo json_encode(["success" => false, "message" => "Faltan datos obligatorios"]);
+        echo json_encode(["success" => false, "message" => "Datos inválidos. El precio y el stock deben ser numéricos."]);
     }
     exit();
 
@@ -65,7 +70,7 @@ if ($method === 'GET') {
     $conn = getConnection();
     $id = $conn->real_escape_string($id);
 
-    // Tu consulta original de eliminación física
+    // Consulta de eliminación física
     $sql = "DELETE FROM productos WHERE Id = '$id'";
 
     if ($conn->query($sql)) {
@@ -75,3 +80,4 @@ if ($method === 'GET') {
     }
     exit();
 }
+?>
