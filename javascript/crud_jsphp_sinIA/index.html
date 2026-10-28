@@ -16,6 +16,10 @@
       th:hover {
         background-color: rgba(0, 0, 0, 0.03);
       }
+      dialog {
+        width: 100%;
+        max-width: 800px; /* Hacemos el modal un poco más ancho para que entren bien las columnas */
+      }
     </style>
 </head>
 <body>
@@ -35,13 +39,13 @@
       </fieldset>
     </form>
 
-    <!-- Tabla donde se cargarán los productos vía fetch -->
+    <!-- Tabla principal de inventario -->
     <table>
       <thead>
         <tr>
-          <th onclick="ordenarPor('Nombre')">Nombre ↕️</th>
-          <th onclick="ordenarPor('Precio')">Precio ↕️</th>
-          <th onclick="ordenarPor('Stock')">Stock ↕️</th>
+          <th onclick="ordenarPor('Nombre')">Nombre</th>
+          <th onclick="ordenarPor('Precio')">Precio</th>
+          <th onclick="ordenarPor('Stock')">Stock</th>
           <th>Subtotal</th>
           <th>Acciones</th>
         </tr>
@@ -51,7 +55,35 @@
       </tbody>
     </table>
     <p id="total-productos">Total: 0 productos</p>
+
+    <!-- Botón para abrir el modal -->
+    <button onclick="document.getElementById('modalConInput').showModal()">Registrar Venta</button>
   </main>
+
+  <!-- Ventana Modal de Ventas -->
+  <dialog id="modalConInput">
+    <form method="dialog">
+      <h3>Seleccionar productos para la venta</h3>
+      <table>
+        <thead>
+          <tr>
+            <th onclick="ventaordenarPor('Nombre')">Nombre</th>
+            <th onclick="ventaordenarPor('Precio')">Precio</th>
+            <th onclick="ventaordenarPor('Stock')">Stock</th>
+            <th>Cantidad</th> <!-- Añadido para que coincida con el JavaScript -->
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-productosventa">
+          <!-- Los datos se inyectarán aquí con JavaScript -->
+        </tbody>
+      </table>
+      <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+        <button value="cancel" class="secondary outline">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
 
   <!-- Tu archivo de JavaScript -->
   <script src="js/app.js"></script>
